@@ -96,21 +96,14 @@
         }
 
         .button:nth-child(3) .icon {
-          background: radial-gradient(
-            circle at 30% 107%,
-            #fdf497 0%,
-            #fdf497 5%,
-            #fd5949 45%,
-            #d6249f 60%,
-            #285aeb 90%
-          );
+          background: rgb(33, 145, 183);
         }
 
         .button:nth-child(3):hover .icon {
-          background: var(--white);
+          background: white;
 
           a {
-            color: #e1306c;
+            color: rgb(33, 145, 183);
 
             i {
               font-size: 35px;

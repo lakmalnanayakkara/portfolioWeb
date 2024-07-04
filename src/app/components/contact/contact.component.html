@@ -33,11 +33,6 @@
       data-aos-offset="100"
       data-aos-once="true"
     >
-      <!-- <form
-        action="javacript:void(0)"
-        class="contactForm"
-        (submit)="onSubmit()"
-      > -->
       <mat-grid-list
         cols="4"
         rowHeight="80px"
@@ -52,6 +47,7 @@
               formControlName="name"
               type="text"
               placeholder="Enter Your Name"
+              required
             />
             <mat-error
               *ngIf="
@@ -60,7 +56,10 @@
               "
             >
               <span *ngIf="contactForm.controls.name.errors.pattern"
-                >This is invalid name,Please Check.</span
+                >This is invalid name,Please Check</span
+              >
+              <span *ngIf="contactForm.controls.name.hasError('required')"
+                >Name is required</span
               >
             </mat-error>
           </mat-form-field>
@@ -73,6 +72,7 @@
               formControlName="email"
               type="text"
               placeholder="Enter Your Email"
+              required
             />
             <mat-error
               *ngIf="
@@ -82,6 +82,8 @@
             >
               <span *ngIf="contactForm.controls.email.errors.pattern"
                 >Invalid Email, Please provide a valid email.</span
+              ><span *ngIf="contactForm.controls.name.hasError('required')"
+                >Email is required</span
               >
             </mat-error>
           </mat-form-field>
@@ -104,6 +106,9 @@
               <span *ngIf="contactForm.controls.subject.errors.minlength"
                 >Subject length must be 10 .</span
               >
+              <span *ngIf="contactForm.controls.name.hasError('required')"
+                >Subject is required</span
+              >
             </mat-error>
           </mat-form-field>
         </mat-grid-tile>
@@ -125,7 +130,10 @@
               "
             >
               <span *ngIf="contactForm.controls.message.errors.minlength"
-                >Message should contains atleast 20 letters.</span
+                >Message should contains at least 20 letters.</span
+              >
+              <span *ngIf="contactForm.controls.name.hasError('required')"
+                >Message is required</span
               >
             </mat-error>
           </mat-form-field>
@@ -135,14 +143,16 @@
             <button
               type="submit"
               (click)="onSubmit()"
-              [disabled]="!(contactForm.valid && contactForm.dirty)"
+              [disabled]="
+                (contactForm.invalid && contactForm.dirty) ||
+                contactForm.untouched
+              "
             >
               Send
             </button>
           </div>
         </mat-grid-tile>
       </mat-grid-list>
-      <!-- </form> -->
     </div>
   </div>
 </div>

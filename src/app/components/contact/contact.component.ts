@@ -16,7 +16,7 @@ export class ContactComponent {
   key = environment.emailJSKey;
   serviceId = environment.mailService;
   templateId = environment.templateId;
-  toMail: string = 'Juyel';
+  toMail: string = 'Pasindu Lakmal';
 
   contactForm: any = FormGroup;
 
@@ -28,19 +28,26 @@ export class ContactComponent {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      name: [null, [Validators.pattern(Globalconstant.nameRegex)]],
-      email: [null, [Validators.pattern(Globalconstant.emailRegex)]],
-      subject: [null, [Validators.minLength(10)]],
-      message: [null, [Validators.minLength(20)]],
+      name: [
+        null,
+        [Validators.required, Validators.pattern(Globalconstant.nameRegex)],
+      ],
+      email: [
+        null,
+        [Validators.required, Validators.pattern(Globalconstant.emailRegex)],
+      ],
+      subject: [null, [Validators.required, Validators.minLength(10)]],
+      message: [null, [Validators.required, Validators.minLength(20)]],
     });
   }
 
   onSubmit = async (): Promise<void> => {
+    console.log('sent');
+
     emailjs.init(this.key);
     const formData = this.contactForm.value;
     let response = await emailjs.send(this.serviceId, this.templateId, {
       from_name: formData.name,
-      to_name: this.toMail,
       from_email: formData.email,
       subject: formData.subject,
       message: formData.message,

@@ -1,103 +1,31 @@
-import { Component } from '@angular/core';
-import { Tools } from 'src/app/models/tools';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { ProjectsService } from 'src/app/services/projects.service';
+import { ProjectDetails } from 'src/app/shared/project-details';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
-export class ProjectsComponent {
-  firstPoject: Tools[] = [
-    {
-      name: 'Java',
-    },
-    {
-      name: 'Spring boot',
-    },
-    {
-      name: 'Angular',
-    },
-    {
-      name: 'Strapi',
-    },
-    {
-      name: 'AWS',
-    },
-    {
-      name: 'Docker',
-    },
-    {
-      name: 'GIT',
-    },
-    {
-      name: 'Gitlab',
-    },
-  ];
+export class ProjectsComponent implements OnInit {
+  projects: ProjectDetails[] = [];
+  constructor(private projectsService: ProjectsService) {}
 
-  secoundProject: Tools[] = [
-    {
-      name: 'Java',
-    },
-    {
-      name: 'Spring boot',
-    },
-    {
-      name: 'React',
-    },
-    {
-      name: 'Jhipster',
-    },
-    {
-      name: 'Redis',
-    },
-    {
-      name: 'ActiveMQ',
-    },
-    {
-      name: 'Apache Camel',
-    },
-    {
-      name: 'Docker',
-    },
-    {
-      name: 'Grafana',
-    },
-    {
-      name: 'GIT',
-    },
-    {
-      name: 'GITHub',
-    },
-  ];
+  ngOnInit(): void {
+    this.projects = this.projectsService.getProjects();
+  }
 
-  thirdProject: Tools[] = [
-    {
-      name: 'HTML',
-    },
-    {
-      name: 'SCSS',
-    },
-    {
-      name: 'TypeScript',
-    },
-    {
-      name: 'Angular',
-    },
-    {
-      name: 'Aungular Material',
-    },
-  ];
+  projectOpen(i: number) {
+    window.open(this.projectsService.getProjectById(i).projectLink, '_blank');
+  }
 
-  projectOne = () => {
-    window.open(environment.projectOne, '_blank');
-  };
-
-  projectTwo = () => {
-    window.open(environment.projectTwo, '_blank');
-  };
-
-  projectThree = () => {
-    window.open(environment.projectThree, '_blank');
-  };
+  plusSlides(project: ProjectDetails, n: number) {
+    project.currentImageIndex += n;
+    if (
+      project.currentImageIndex === project?.images?.length ||
+      project.currentImageIndex < 0
+    ) {
+      project.currentImageIndex = 0;
+    }
+  }
 }

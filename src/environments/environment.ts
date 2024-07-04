@@ -13,13 +13,7 @@ export const environment = {
 
   // create email js acccount
 
-  mailService: 'input this details from your email js account',
-  templateId: 'input this details from your email js account',
-  emailJSKey: 'input this details from your email js account',
-
-  // project
-
-  projectOne: 'https://www.flipkart.com/',
-  projectTwo: 'https://www.flipkart.com/',
-  projectThree: 'https://www.flipkart.com/',
+  mailService: 'service_uo4lvlm',
+  templateId: 'template_u51n473',
+  emailJSKey: 'y4CxiobpXAf3T5v_K',
 };

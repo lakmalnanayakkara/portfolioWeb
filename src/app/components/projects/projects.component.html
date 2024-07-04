@@ -25,153 +25,68 @@
       </span>
     </h2>
 
-    <app-project-items Responsive>
-      <img
-        src="../../../assets/projects/project.png"
-        alt="Software Screenshot"
-        class="projectsRowImg"
-        loading="lazy"
-      />
-      <h3
-        class="projectsRowContentTitle"
-        data-aos="fade-down-left"
-        data-aos-delay="120"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Project One
-      </h3>
-      <p
-        class="projectsRowContentDesc"
-        data-aos="fade-left"
-        data-aos-delay="150"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem error
-        illo ipsa repellat pariatur iure, sunt veritatis ab nesciunt aperiam
-        temporibus distinctio ipsum a neque.
-      </p>
-      <div
-        class="tools"
-        data-aos="zoom-in-left"
-        data-aos-delay="190"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        <div class="toolsName" *ngFor="let tools of firstPoject">
-          {{ tools.name | uppercase }}
+    <div *ngFor="let project of projects">
+      <mat-divider></mat-divider>
+      <app-project-items Responsive>
+        <div class="slideshow-container" *ngIf="project.images">
+          <div
+            *ngFor="let image of project.images; let i = index"
+            [ngClass]="{ active: i === project.currentImageIndex }"
+            class="mySlides fade"
+          >
+            <img
+              [src]="image"
+              alt="Software Screenshot"
+              class="projectsRowImg"
+              loading="lazy"
+            />
+          </div>
+          <a class="prev" (click)="plusSlides(project, -1)">&#10094;</a>
+          <a class="next" (click)="plusSlides(project, 1)">&#10095;</a>
         </div>
-      </div>
-      <button mat-raised-button class="livBtn" (click)="projectOne()">
-        Live Link
-      </button>
-    </app-project-items>
-
-    <app-project-items Responsive>
-      <img
-        src=""
-        alt="Software Screenshot"
-        class="projectsRowImg"
-        loading="lazy"
-      />
-      <h3
-        class="projectsRowContentTitle"
-        data-aos="fade-down-left"
-        data-aos-delay="120"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Project Two
-      </h3>
-      <p
-        class="projectsRowContentDesc"
-        data-aos="fade-left"
-        data-aos-delay="150"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam dicta
-        obcaecati maxime ipsa labore minima aliquid sapiente ex odit inventore
-        minus, quisquam quis numquam incidunt dolore corrupti! Accusamus, sit
-        at.
-      </p>
-      <div
-        class="tools"
-        data-aos="zoom-in-left"
-        data-aos-delay="190"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        <div class="toolsName" *ngFor="let tools of secoundProject">
-          {{ tools.name | uppercase }}
+        <h3
+          class="projectsRowContentTitle"
+          data-aos="fade-down-left"
+          data-aos-delay="120"
+          data-aos-duration="500"
+          data-aos-easing="ease forwards"
+          data-aos-offset="100"
+          data-aos-once="true"
+        >
+          {{ project.name }}
+        </h3>
+        <p
+          class="projectsRowContentDesc"
+          data-aos="fade-left"
+          data-aos-delay="150"
+          data-aos-duration="500"
+          data-aos-easing="ease forwards"
+          data-aos-offset="100"
+          data-aos-once="true"
+        >
+          {{ project.description }}
+        </p>
+        <div
+          class="tools"
+          data-aos="zoom-in-left"
+          data-aos-delay="190"
+          data-aos-duration="500"
+          data-aos-easing="ease forwards"
+          data-aos-offset="100"
+          data-aos-once="true"
+        >
+          <div class="toolsName" *ngFor="let tool of project.technologies">
+            {{ tool | uppercase }}
+          </div>
         </div>
-      </div>
-      <button mat-raised-button class="livBtn" (click)="projectTwo()">
-        Live Link
-      </button>
-    </app-project-items>
-
-    <app-project-items Responsive>
-      <img
-        src="../../../assets/projects/project.png"
-        alt="Software Screenshot"
-        class="projectsRowImg"
-        loading="lazy"
-      />
-      <h3
-        class="projectsRowContentTitle"
-        data-aos="fade-down-left"
-        data-aos-delay="120"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Project Three
-      </h3>
-      <p
-        class="projectsRowContentDesc"
-        data-aos="fade-left"
-        data-aos-delay="150"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-        numquam possimus blanditiis odit nulla, odio eos non unde ipsum incidunt
-        quam accusantium consequuntur repudiandae recusandae eius magni ipsam
-        nisi deleniti!
-      </p>
-      <div
-        class="tools"
-        data-aos="zoom-in-left"
-        data-aos-delay="190"
-        data-aos-duration="500"
-        data-aos-easing="ease forwards"
-        data-aos-offset="100"
-        data-aos-once="true"
-      >
-        <div class="toolsName" *ngFor="let tools of thirdProject">
-          {{ tools.name | uppercase }}
-        </div>
-      </div>
-      <button mat-raised-button class="livBtn" (click)="projectThree()">
-        Live Link
-      </button>
-    </app-project-items>
+        <button
+          mat-raised-button
+          class="livBtn"
+          (click)="projectOpen(project.id)"
+        >
+          GitHub Link
+        </button>
+      </app-project-items>
+    </div>
   </div>
 </div>
