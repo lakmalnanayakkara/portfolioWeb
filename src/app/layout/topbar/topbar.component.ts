@@ -1,6 +1,13 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-topbar',
@@ -8,33 +15,49 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent {
+  isMenuOpen: boolean = false;
+  isMobile: boolean = false;
+
+  @ViewChild('indicator') indicator!: ElementRef;
+
+  private subscription!: Subscription;
+
   @Output() sidenavToggle = new EventEmitter<void>();
 
-  @ViewChild(MatSidenav) sidenav!: MatSidenav;
-
-  public isMobile = false;
-
-  constructor(private observer: BreakpointObserver) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {}
 
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-      this.isMobile = res.matches;
+    this.subscription = this.observer
+      .observe(['(max-width: 800px)'])
+      .subscribe((res) => {
+        this.isMobile = res.matches;
+      });
+    console.log(this.isMobile);
+  }
 
-      if (this.isMobile) {
-        this.sidenav.mode = 'over';
-        this.sidenav?.close();
-      } else {
-        this.sidenav?.close();
-      }
+  setActive = (id: string) => {
+    const navLink = this.el.nativeElement.querySelectorAll('.navItems a');
+    navLink.forEach((e: HTMLElement) => {
+      this.renderer.removeClass(e, 'active');
     });
+    const activeLink = this.el.nativeElement.querySelector(
+      `.navItems a[href='#${id}']`
+    );
+    this.renderer.addClass(activeLink, 'active');
+  };
 
-    this.isMobile = this.observer.isMatched('(max-width: 800px)');
-    if (!this.isMobile) {
-      this.sidenav.close();
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  toggleSidenav() {
+  toggleSidenav = () => {
+    let menu = this.el.nativeElement.querySelector('#humMenu');
+    this.renderer.addClass(menu, 'openMenu');
+    this.isMenuOpen = !this.isMenuOpen;
     this.sidenavToggle.emit();
-  }
+  };
 }

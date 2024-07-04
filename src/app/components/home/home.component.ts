@@ -1,5 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -16,4 +17,28 @@ export class HomeComponent {
       this.isMobile = res.matches;
     });
   }
+
+  redirectToLinkdin = (): void => {
+    window.open(environment.linkedinLink, '-blank');
+  };
+
+  redirectToFB = () => {
+    window.open(environment.fbLink, '-blank');
+  };
+
+  redirectToGithub = () => {
+    window.open(environment.githubLink, '-blank');
+  };
+
+  redirectToTwit = () => {
+    window.open(environment.twitLink, '-blank');
+  };
+
+  redirectToProject = () => {
+    window.location.href = '#projects';
+  };
+
+  redirectToAbout = () => {
+    window.location.href = '#about';
+  };
 }
