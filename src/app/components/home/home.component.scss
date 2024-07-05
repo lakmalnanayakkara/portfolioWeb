@@ -12,6 +12,7 @@
   min-height: 50rem;
   position: relative;
   clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 50% 100%, 0% 95%);
+  top: 25%;
 
   .socialIcons {
     display: flex;
@@ -162,13 +163,14 @@
       justify-content: center;
       align-items: center;
       max-width: 100rem;
+      text-align: justify;
 
       p {
         width: fit-content;
         font-size: 1rem;
         font-family: var(--font-mono);
         line-height: 1.5;
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 9;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
@@ -233,7 +235,7 @@
 
   .scrollDown {
     position: absolute;
-    bottom: 20px;
+    bottom: 1px;
     width: 40px;
     height: 40px;
     left: 50%;
