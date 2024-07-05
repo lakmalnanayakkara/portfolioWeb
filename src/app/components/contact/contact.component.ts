@@ -42,15 +42,19 @@ export class ContactComponent {
   }
 
   onSubmit = async (): Promise<void> => {
-    emailjs.init(this.key);
-    const formData = this.contactForm.value;
-    let response = await emailjs.send(this.serviceId, this.templateId, {
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-    });
-    this.router.navigate(['/confirm']);
-    this.contactForm.reset();
+    if (this.contactForm.invalid) {
+      this.snackbar.openSnackBar('Invalid Data.Please check and resubmit.');
+    } else {
+      this.router.navigate(['/confirm']);
+      emailjs.init(this.key);
+      const formData = this.contactForm.value;
+      let response = await emailjs.send(this.serviceId, this.templateId, {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      });
+      this.contactForm.reset();
+    }
   };
 }
