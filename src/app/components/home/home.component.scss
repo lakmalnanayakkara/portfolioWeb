@@ -132,9 +132,9 @@
 
   .homeContent {
     display: grid;
-    padding: 1rem 2rem;
+    //padding: 1rem 2rem;
     position: absolute;
-    top: 52%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -195,7 +195,7 @@
         width: 200px;
         padding: 15px 0;
         text-align: center;
-        margin: 80px 10px;
+        margin: 0px 10px;
         font-weight: bold;
         border: 2px solid var(--navy);
         background-color: transparent;
@@ -276,7 +276,15 @@
 @media (min-width: 800px) {
   .homeContainer {
     clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 50% 100%, 0% 90%);
-
+    .homeContent {
+      padding: 1rem 2rem;
+      top: 50%;
+      .btn {
+        button {
+          margin: 80px 10px;
+        }
+      }
+    }
     .email {
       display: block;
       position: absolute;
