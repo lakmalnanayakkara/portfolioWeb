@@ -142,7 +142,7 @@
     height: auto;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 0.3fr;
-    row-gap: 10px;
+    // row-gap: 10px;
     place-items: center;
 
     h1 {
@@ -195,7 +195,7 @@
         width: 200px;
         padding: 15px 0;
         text-align: center;
-        margin: 40px 10px;
+        margin: 50px 10px;
         font-weight: bold;
         border: 2px solid var(--navy);
         background-color: transparent;
