@@ -42,8 +42,6 @@ export class ContactComponent {
   }
 
   onSubmit = async (): Promise<void> => {
-    console.log('sent');
-
     emailjs.init(this.key);
     const formData = this.contactForm.value;
     let response = await emailjs.send(this.serviceId, this.templateId, {

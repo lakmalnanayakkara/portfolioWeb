@@ -36,7 +36,6 @@ export class TopbarComponent {
       .subscribe((res) => {
         this.isMobile = res.matches;
       });
-    console.log(this.isMobile);
   }
 
   setActive = (id: string) => {
